@@ -23,7 +23,7 @@ def index():
         cur = conn.cursor()
         cur.execute("SELECT * FROM books;")
         books = cur.fetchall()
-    except Exception as _:
+    except Exception:
         abort(400)
     finally:
         cur.close()
@@ -52,7 +52,7 @@ def create_book():
             "VALUES (%s, %s, %s, %s)",
             (title, author, pages_num, review),
         )
-    except Exception as _:
+    except Exception:
         abort(400)
     finally:
         conn.commit()
