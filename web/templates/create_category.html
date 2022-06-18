@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Replenishments{% endblock %}
+
+{% block content %}
+
+<ul class="tab tab-block">
+    <li class="tab-item">
+        <a id="new-simple-category-btn">New Simple Category</a>
+    </li>
+    <li class="tab-item">
+        <a id="new-super-category-btn">New Super Category</a>
+    </li>
+    <li class="tab-item">
+        <a id="add-category-to-super-category-btn">Add Category to Super Category</a>
+    </li>
+</ul>
+
+<div class="container" id="new-simple-category-form">
+    <form action="{{ url_for('replenishments') }}" method="post" class="form-horizontal col-3">
+        <div class="form-group">
+            <label class="form-label" for="manuf">Form1</label>
+            <input class="form-input" type="text" id="manuf" name="manuf" placeholder="Manufacturer">
+            <label class="form-label" for="serial_nr">IVM Serial Number</label>
+            <input class="form-input" type="number" id="serial_nr" name="serial_nr" placeholder="IVM Serial Number">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="container" id="new-super-category-form">
+    <form action="{{ url_for('replenishments') }}" method="post" class="form-horizontal col-3">
+        <div class="form-group">
+            <label class="form-label" for="manuf">Form2</label>
+            <input class="form-input" type="text" id="manuf" name="manuf" placeholder="Manufacturer">
+            <label class="form-label" for="serial_nr">IVM Serial Number</label>
+            <input class="form-input" type="number" id="serial_nr" name="serial_nr" placeholder="IVM Serial Number">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Search</button>
+        </div>
+    </form>
+</div>
+
+<div class="container" id="add-category-to-super-category-form">
+    <form action="{{ url_for('replenishments') }}" method="post" class="form-horizontal col-3">
+        <div class="form-group">
+            <label class="form-label" for="manuf">Form3</label>
+            <input class="form-input" type="text" id="manuf" name="manuf" placeholder="Manufacturer">
+            <label class="form-label" for="serial_nr">IVM Serial Number</label>
+            <input class="form-input" type="number" id="serial_nr" name="serial_nr" placeholder="IVM Serial Number">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Search</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    var btn1 = document.getElementById("new-simple-category-btn");
+    var btn2 = document.getElementById("new-super-category-btn");
+    var btn3 = document.getElementById("add-category-to-super-category-btn");
+    var form1 = document.getElementById("new-simple-category-form");
+    var form2 = document.getElementById("new-super-category-form");
+    var form3 = document.getElementById("add-category-to-super-category-form");
+
+    var selected_btn = btn1;
+    var selected_form = form1;
+
+    selected_btn.classList.toggle("active");
+    form1.style.display = "block";
+    form2.style.display = "none";
+    form3.style.display = "none";
+
+    btn1.addEventListener("click", () => {
+        selected_btn.classList.toggle("active");
+        selected_form.style.display = 'none';
+        btn1.classList.toggle("active");
+        form1.style.display = 'block'
+        selected_btn = btn1;
+        selected_form = form1;
+    });
+    btn2.addEventListener("click", () => {
+        selected_btn.classList.toggle("active");
+        selected_form.style.display = 'none';
+        btn2.classList.toggle("active");
+        form2.style.display = 'block'
+        selected_btn = btn2;
+        selected_form = form2;
+    });
+    btn3.addEventListener("click", () => {
+        selected_btn.classList.toggle("active");
+        selected_form.style.display = 'none';
+        btn3.classList.toggle("active");
+        form3.style.display = 'block'
+        selected_btn = btn3;
+        selected_form = form3;
+    });
+</script>
+
+{% endblock %}
