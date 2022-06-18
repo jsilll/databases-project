@@ -1,2 +1,4 @@
 web/__pycache__
-web/env
+web/venv
+
+.vscode
