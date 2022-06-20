@@ -76,12 +76,12 @@ CREATE TABLE point_of_retail (
 );
 
 CREATE TABLE installed_at (
-    serial_nr   serial          NOT NULL UNIQUE,
-    manuf       varchar(50)     NOT NULL,
-    place       varchar(100)    NOT NULL,
+    serial_nr               serial          NOT NULL UNIQUE,
+    manuf                   varchar(50)     NOT NULL,
+    point_of_retail_name    varchar(100)    NOT NULL,
     CONSTRAINT pk_installed_at  PRIMARY KEY (serial_nr, manuf),
     CONSTRAINT fk_installed_at_ivm FOREIGN KEY (serial_nr, manuf) REFERENCES ivm(serial_nr, manuf),
-    CONSTRAINT fk_installed_at_place FOREIGN KEY (place) REFERENCES point_of_retail(point_of_retail_name)
+    CONSTRAINT fk_installed_at_place FOREIGN KEY (point_of_retail_name) REFERENCES point_of_retail(point_of_retail_name)
 );
 
 CREATE TABLE shelve (

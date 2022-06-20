@@ -504,7 +504,7 @@ INSERT INTO replenishment_event VALUES (21, 5, 3, 'manuf1', '2021-11-03 12:01', 
 INSERT INTO replenishment_event VALUES (21, 5, 3, 'manuf1', '2021-10-30 13:34', 19, 1);
 INSERT INTO replenishment_event VALUES (21, 5, 3, 'manuf1', '2021-10-10 17:24', 24, 1);
 
-INSERT INTO replenishment_event VALUES (1, 1, 4, 'manuf2', '2021-11-03 12:04', 9, 1);
+INSERT INTO replenishment_event VALUES (1, 1, 4, 'manuf2', '2021-10-21 14:02', 9, 1);
 INSERT INTO replenishment_event VALUES (6, 1, 4, 'manuf2', '2021-11-07 17:21', 20, 1);
 INSERT INTO replenishment_event VALUES (23, 2, 4, 'manuf2', '2021-11-03 16:34', 4, 3);
 INSERT INTO replenishment_event VALUES (24, 2, 4, 'manuf2', '2021-11-03 18:22', 22, 3);
