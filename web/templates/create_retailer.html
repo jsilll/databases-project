@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Replenishments{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <form action="{{ url_for('create_retailer') }}" method="post" class="form-horizontal col-3">
+        <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Name">
+            <label class="form-label" for="tin">TIN</label>
+            <input class="form-input" type="number" id="tin" name="tin" placeholder="TIN">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Create</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

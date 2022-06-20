@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Replenishments{% endblock %}
+
+{% block content %}
+
+<ul class="tab tab-block">
+    <li class="tab-item">
+        <a id="delete-simple-category-btn">Simple Category</a>
+    </li>
+    <li class="tab-item">
+        <a id="delete-super-category-btn">Super Category</a>
+    </li>
+</ul>
+
+<div class="container" id="delete-simple-category-form">
+    <form action="{{ url_for('delete_simple_category') }}" method="post" class="form-horizontal col-3">
+        <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Name">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Delete</button>
+        </div>
+    </form>
+</div>
+
+<div class="container" id="new-super-category-form">
+    <form action="{{ url_for('delete_super_category') }}" method="post" class="form-horizontal col-3">
+        <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Name">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Delete</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    var btn1 = document.getElementById("delete-simple-category-btn");
+    var btn2 = document.getElementById("delete-super-category-btn");
+    var form1 = document.getElementById("delete-simple-category-form");
+    var form2 = document.getElementById("new-super-category-form");
+
+    var selected_btn = btn1;
+    var selected_form = form1;
+
+    form1.style.display = "block";
+    form2.style.display = "none";
+    selected_btn.classList.toggle("active");
+
+    btn1.addEventListener("click", () => {
+        selected_btn.classList.toggle("active");
+        selected_form.style.display = 'none';
+        btn1.classList.toggle("active");
+        form1.style.display = 'block'
+        selected_btn = btn1;
+        selected_form = form1;
+    });
+    btn2.addEventListener("click", () => {
+        selected_btn.classList.toggle("active");
+        selected_form.style.display = 'none';
+        btn2.classList.toggle("active");
+        form2.style.display = 'block'
+        selected_btn = btn2;
+        selected_form = form2;
+    });
+</script>
+
+{% endblock %}
