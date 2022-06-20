@@ -37,7 +37,7 @@ def index_page():
 
 @app.route("/replenishments/", methods=["GET"])
 def replenishments_page():
-    return render_template("replenishments.html")
+    return render_template("replenishments/replenishments.html")
 
 # --- List --- #
 
@@ -70,13 +70,13 @@ def list_replenishments():
         cur.close()
         conn.close()
     
-    return render_template("replenishments.html", serial_nr=serial_nr, manuf=manuf, table=res)
+    return render_template("replenishments/replenishments.html", serial_nr=serial_nr, manuf=manuf, table=res)
 
 # -------------- Categories Page -------------- #
 
 @app.route('/categories/', methods=["GET"])
 def categories_page():
-    return render_template("categories.html")
+    return render_template("categories/categories.html")
 
 # --- Create --- #
 
@@ -84,13 +84,13 @@ def categories_page():
 def list_categories():
     # TODO: 
     print(request.form)
-    return render_template("categories.html")
+    return render_template("categories/categories.html")
 
 # --- Create --- #
 
 @app.route('/categories/create', methods=["GET"])
 def create_categories_page():
-    return render_template("create_category.html")
+    return render_template("categories/create_category.html")
 
 @app.route('/categories/create/simple_category', methods=['POST'])
 def create_simple_category():
@@ -114,7 +114,7 @@ def create_sub_category():
 
 @app.route('/categories/delete/', methods=['GET'])
 def delete_categories_page():
-    return render_template("delete_category.html")
+    return render_template("categories/delete_category.html")
 
 @app.route('/categories/delete/simple_category', methods=['POST'])
 def delete_simple_category():
@@ -132,13 +132,13 @@ def delete_super_category():
 
 @app.route("/retailers/", methods=["GET"])
 def retailers_page():
-    return render_template("retailers.html")
+    return render_template("retailers/retailers.html")
 
 # --- Create --- #
 
 @app.route("/retailers/create", methods=["GET"])
 def create_retailers_page():
-    return render_template("create_retailer.html")
+    return render_template("retailers/create_retailer.html")
 
 @app.route("/retailers/create", methods=["POST"])
 def create_retailer():
@@ -152,7 +152,7 @@ def create_retailer():
 def delete_retailers_page():
     # TODO:
     print(request.form)
-    return render_template("delete_retailer.html")
+    return render_template("retailers/delete_retailer.html")
 
 @app.route("/retailers/delete", methods=["POST"])
 def delete_retailer():
@@ -164,8 +164,8 @@ def delete_retailer():
 
 @app.errorhandler(404)
 def not_found_page():
-    return render_template("404.html"), 404
+    return render_template("errors/404.html"), 404
 
 @app.errorhandler(500)
 def internal_error_page():
-    return render_template("500.html"), 500
+    return render_template("errors/500.html"), 500
