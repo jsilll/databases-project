@@ -8,7 +8,7 @@ HAVING COUNT(*) >= ALL(
   GROUP BY tin
 );
 
--- Qual o nome do ou dos retalhistas que são responsáveis por todas as categorias simples?
+-- Qual o nome do ou dos retalhistas que são responsáveis por todas as categorias simples? TODO
 SELECT DISTINCT retailer_name
 FROM retailer
 NATURAL JOIN responsible_for
