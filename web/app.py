@@ -5,10 +5,11 @@ from flask import (render_template,
                    url_for,
                    redirect,
                    abort)
+from markupsafe import EscapeFormatter
 
 from connection import get_db_connection
 
-# [ ] Inserir e remover um retalhista, com todos os seus produtos, garantindo que esta operação seja atómica;
+# [x] Inserir e remover um retalhista, com todos os seus produtos, garantindo que esta operação seja atómica;
 # [x] Listar todos os eventos de reposição de uma IVM, apresentando o número de unidades repostas por categoria de produto
 # [x] Inserir e remover categorias e sub-categorias
 # [ ] Listar todas as sub-categorias de uma super-categoria, a todos os níveis de profundidade.
@@ -50,11 +51,11 @@ def list_replenishments():
                     '(SELECT * '
                     'FROM replenishment_event '
                     'WHERE serial_nr = %s AND manuf = %s) AS s '
-                    'GROUP BY category_name ',
+                    'GROUP BY category_name;',
                     (serial_nr, manuf))
         res = cur.fetchall()
     except Exception as e:
-        abort(400)
+        return str(e)
     finally:
         cur.close()
         conn.close()
@@ -73,9 +74,32 @@ def categories_page():
 
 @app.route('/categories/', methods=["POST"])
 def list_categories():
-    # TODO:
-    print(request.form)
-    return render_template("categories/categories.html")
+    super_category_name = request.form["super_category_name"]
+
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('WITH RECURSIVE all_sub AS ( '
+                    'SELECT super_category, category '
+                    'FROM has_other '
+                    'WHERE super_category = %s '
+                    'UNION '
+                    'SELECT e.super_category, e.category '
+                    'FROM has_other e '
+                    'INNER JOIN all_sub s ON s.category = e.super_category '
+                    ') '
+                    'SELECT * '
+                    'FROM '
+                    'all_sub; ',
+                    (super_category_name,))
+        res = cur.fetchall()
+    except Exception as e:
+        return str(e)
+    finally:
+        cur.close()
+        conn.close()
+
+    return render_template("categories/categories.html", super_category_name=super_category_name, table=res)
 
 # --- Create --- #
 
@@ -92,7 +116,8 @@ def create_simple_category():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('INSERT INTO simple_category VALUES (%s)', (name))
+        cur.execute('INSERT INTO category VALUES (%s);', (name,))
+        cur.execute('INSERT INTO simple_category VALUES (%s);', (name,))
         conn.commit()
     except Exception as e:
         return str(e)
@@ -111,12 +136,11 @@ def create_super_category():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('INSERT INTO super_category VALUES (%s)', (name))
-        cur.execute('INSERT INTO has_other VALUES (%s)',
+        cur.execute('INSERT INTO category VALUES (%s);', (name,))
+        cur.execute('INSERT INTO super_category VALUES (%s);', (name,))
+        cur.execute('INSERT INTO has_other VALUES (%s, %s);',
                     (name, sub_category_name))
         conn.commit()
-    except Exception as e:
-        return str(e)
     finally:
         cur.close()
         conn.close()
@@ -132,7 +156,7 @@ def create_sub_category():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('INSERT INTO has_other VALUES (%s)',
+        cur.execute('INSERT INTO has_other VALUES (%s, %s);',
                     (super_category_name, sub_category_name))
         conn.commit()
     except Exception as e:
@@ -158,15 +182,38 @@ def delete_simple_category():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('DELETE FROM simple_category WHERE category_name = %s',
-                    (name))
-        cur.execute('DELETE FROM has_other WHERE category = %s',
-                    (name))
-        cur.execute('DELETE FROM has_category WHERE category_name = %s',
-                    (name))
+        cur.execute(
+            'DELETE FROM replenishment_event '
+            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute(
+            'DELETE FROM planogram '
+            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute(
+            'DELETE FROM has_category '
+            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute(
+            'DELETE FROM has_other '
+            'WHERE ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM product WHERE category_name = %s;', (name,))
+        cur.execute(
+            'DELETE FROM responsible_for WHERE category_name = %s', (name,))
+        cur.execute('DELETE FROM replenishment_event '
+                    'WHERE '
+                    'nr IN (SELECT nr FROM shelve WHERE category_name = %s) '
+                    'serial_nr IN (SELECT serial_nr FROM shelve WHERE category_name = %s) '
+                    'manuf IN (SELECT manuf FROM shelve WHERE category_name = %s);', (name, name, name))
+        cur.execute('DELETE FROM planogram '
+                    'WHERE '
+                    'nr IN (SELECT nr FROM shelve WHERE category_name = %s) '
+                    'serial_nr IN (SELECT serial_nr FROM shelve WHERE category_name = %s) '
+                    'manuf IN (SELECT manuf FROM shelve WHERE category_name = %s);', (name, name, name))
+        cur.execute('DELETE FROM shelve WHERE category_name = %s', (name,))
+        cur.execute(
+            'DELETE FROM simple_category WHERE category_name = %s;', (name,))
+        cur.execute('DELETE FROM category WHERE category_name = %s;', (name,))
         conn.commit()
     except Exception as e:
-        return str(e)
+        return(str(e))
     finally:
         cur.close()
         conn.close()
@@ -181,15 +228,27 @@ def delete_super_category():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('DELETE FROM super_category WHERE category_name = %s',
-                    (name))
-        cur.execute('DELETE FROM has_other WHERE super_category = %s',
-                    (name))
-        cur.execute('DELETE FROM has_category WHERE category_name = %s',
-                    (name))
+        cur.execute(
+            'DELETE FROM replenishment_event '
+            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute(
+            'DELETE FROM planogram '
+            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute(
+            'DELETE FROM has_category '
+            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM has_other WHERE category = %s;', (name,))
+        cur.execute('DELETE FROM has_other WHERE super_category = %s;', (name,))
+        cur.execute('DELETE FROM product WHERE category_name = %s;', (name,))
+        cur.execute(
+            'DELETE FROM responsible_for WHERE category_name = %s', (name,))
+        cur.execute('DELETE FROM shelve WHERE category_name = %s', (name,))
+        cur.execute(
+            'DELETE FROM super_category WHERE category_name = %s;', (name,))
+        cur.execute('DELETE FROM category WHERE category_name = %s;', (name,))
         conn.commit()
     except Exception as e:
-        return str(e)
+        return(str(e))
     finally:
         cur.close()
         conn.close()
@@ -222,9 +281,9 @@ def create_retailer():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('INSERT INTO retailer VALUES (%s, %s)',
+        cur.execute('INSERT INTO retailer VALUES (%s, %s);',
                     (tin, name))
-        cur.execute('INSERT INTO responsible_for VALUES (%s, %s, %s, %s, %s)',
+        cur.execute('INSERT INTO responsible_for VALUES (%s, %s, %s, %s);',
                     (category_name, tin, serial_nr, manuf))
         conn.commit()
     except Exception as e:
@@ -250,12 +309,9 @@ def delete_retailer():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('DELETE FROM retailer WHERE tin = %s',
-                    (tin))
-        cur.execute('DELETE FROM responsible_for WHERE tin = %s',
-                    (tin))
-        cur.execute('DELETE FROM replenishment_event WHERE tin = %s',
-                    (tin))
+        cur.execute('DELETE FROM replenishment_event WHERE tin = %s;', (tin,))
+        cur.execute('DELETE FROM responsible_for WHERE tin = %s;', (tin,))
+        cur.execute('DELETE FROM retailer WHERE tin = %s;', (tin,))
         conn.commit()
     except Exception as e:
         return str(e)
