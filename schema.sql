@@ -49,9 +49,11 @@ CREATE TABLE has_other (
 );
 
 CREATE TABLE product (
-    ean     numeric(13, 0)  NOT NULL UNIQUE,
-    descr   varchar(100)    NOT NULL,
-    CONSTRAINT pk_product PRIMARY KEY (ean)
+    ean     numeric(13, 0)              NOT NULL UNIQUE,
+    descr   varchar(100)                NOT NULL,
+    category_name     varchar(100)      NOT NULL,
+    CONSTRAINT pk_product PRIMARY KEY (ean),
+    CONSTRAINT fk_product_cat   FOREIGN KEY (category_name) REFERENCES category(category_name)
 );
 
 -- pus primary key
@@ -122,9 +124,9 @@ CREATE TABLE responsible_for (
     serial_nr       serial          NOT NULL,
     manuf           varchar(50)     NOT NULL,
     CONSTRAINT pk_responsible_for PRIMARY KEY (category_name, tin, serial_nr, manuf),
-    CONSTRAINT fk_responsible_for_category FOREIGN KEY (category_name) REFERENCES category(category_name);
-    CONSTRAINT fk_responsible_for_tin FOREIGN KEY (tin) REFERENCES retailer(tin);
-    CONSTRAINT fk_responsible_for_ivm FOREIGN KEY (serial_nr, manuf) REFERENCES ivm(serial_nr, manuf);
+    CONSTRAINT fk_responsible_for_category FOREIGN KEY (category_name) REFERENCES category(category_name),
+    CONSTRAINT fk_responsible_for_tin FOREIGN KEY (tin) REFERENCES retailer(tin),
+    CONSTRAINT fk_responsible_for_ivm FOREIGN KEY (serial_nr, manuf) REFERENCES ivm(serial_nr, manuf)
 
 );
 

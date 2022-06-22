@@ -68,31 +68,32 @@ INSERT INTO has_other VALUES ('Bolachas', 'Bolachas de Chocolate');
 INSERT INTO has_other VALUES ('Bolachas', 'Bolachas de Criança');
 INSERT INTO has_other VALUES ('Bolachas', 'Bolachas de Água e Sal');
 
+-- TODO explicar categoria
 -------------- Product --------------
-INSERT INTO product VALUES (1, 'Sopa de espinafres');
-INSERT INTO product VALUES (2, 'Sopa de cenoura passada');
-INSERT INTO product VALUES (3, 'Sopa de legumes');
-INSERT INTO product VALUES (4, 'Sopa de tomate');
-INSERT INTO product VALUES (5, 'Canja');
-INSERT INTO product VALUES (6, 'Sopa de agrião');
-INSERT INTO product VALUES (7, 'Água natural');
-INSERT INTO product VALUES (8, 'Água de morango');
-INSERT INTO product VALUES (9, 'Água com gás');
-INSERT INTO product VALUES (10, 'Coca-cola');
-INSERT INTO product VALUES (11, 'Iced-tea');
-INSERT INTO product VALUES (12, 'Fanta');
-INSERT INTO product VALUES (13, 'Sumo de laranja');
-INSERT INTO product VALUES (14, 'Sumo de maçã');
-INSERT INTO product VALUES (15, 'Compal de maçã');
-INSERT INTO product VALUES (16, 'Compal de pêra');
-INSERT INTO product VALUES (17, 'Sagres');
-INSERT INTO product VALUES (18, 'Super-Bock');
-INSERT INTO product VALUES (19, 'Oreo');
-INSERT INTO product VALUES (20, 'Chips Ahoy');
-INSERT INTO product VALUES (21, 'Tuc');
-INSERT INTO product VALUES (22, 'Principe');
-INSERT INTO product VALUES (23, 'Dino');
-INSERT INTO product VALUES (24, 'Gullon Chocolate');
+INSERT INTO product VALUES (1, 'Sopa de espinafres', 'Sopas Take-Away Quentes');
+INSERT INTO product VALUES (2, 'Sopa de cenoura passada', 'Sopas Bebé');
+INSERT INTO product VALUES (3, 'Sopa de legumes', 'Sopas Take-Away Quentes');
+INSERT INTO product VALUES (4, 'Sopa de tomate', 'Sopas Take-Away Frias');
+INSERT INTO product VALUES (5, 'Canja', 'Sopas Take-Away Quentes');
+INSERT INTO product VALUES (6, 'Sopa de agrião', 'Sopas');
+INSERT INTO product VALUES (7, 'Água natural', 'Água');
+INSERT INTO product VALUES (8, 'Água de morango', 'Água');
+INSERT INTO product VALUES (9, 'Água com gás', 'Água');
+INSERT INTO product VALUES (10, 'Coca-cola', 'Refrigerantes com Gás');
+INSERT INTO product VALUES (11, 'Iced-tea', 'Refrigerantes sem Gás');
+INSERT INTO product VALUES (12, 'Fanta', 'Refrigerantes com Gás');
+INSERT INTO product VALUES (13, 'Sumo de laranja', 'Sumos Naturais');
+INSERT INTO product VALUES (14, 'Sumo de maçã', 'Sumos Naturais');
+INSERT INTO product VALUES (15, 'Compal de maçã', 'Sumos com Conservantes');
+INSERT INTO product VALUES (16, 'Compal de pêra', 'Sumos com Conservantes');
+INSERT INTO product VALUES (17, 'Sagres', 'Cerveja');
+INSERT INTO product VALUES (18, 'Super-Bock', 'Cerveja');
+INSERT INTO product VALUES (19, 'Oreo', 'Bolachas de Chocolate');
+INSERT INTO product VALUES (20, 'Chips Ahoy', 'Bolachas de Chocolate');
+INSERT INTO product VALUES (21, 'Tuc', 'Bolachas de Água e Sal');
+INSERT INTO product VALUES (22, 'Principe', 'Bolachas de Criança');
+INSERT INTO product VALUES (23, 'Dino', 'Bolachas de Criança');
+INSERT INTO product VALUES (24, 'Gullon Chocolate', 'Bolachas de Chocolate');
 
 -------------- has_category --------------
 -- TODO se um produto pertence a uma subcategoria, tem de estar relacionado com todas as supercategorias acima?
