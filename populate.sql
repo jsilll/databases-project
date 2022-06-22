@@ -33,18 +33,18 @@ INSERT INTO super_category VALUES ('Sumos');
 INSERT INTO super_category VALUES ('Bolachas');
 
 -------------- Simple Category --------------
-INSERT INTO simple_category VALUES ('Sopas Bebé');
+INSERT INTO simple_category VALUES ('Sopas Bebé'); --
 INSERT INTO simple_category VALUES ('Sopas Take-Away Frias');
 INSERT INTO simple_category VALUES ('Sopas Take-Away Quentes');
-INSERT INTO simple_category VALUES ('Refrigerantes com Gás');
-INSERT INTO simple_category VALUES ('Refrigerantes sem Gás');
-INSERT INTO simple_category VALUES ('Cerveja');
-INSERT INTO simple_category VALUES ('Sumos Naturais');
-INSERT INTO simple_category VALUES ('Sumos com Conservantes');
-INSERT INTO simple_category VALUES ('Água');
-INSERT INTO simple_category VALUES ('Bolachas de Chocolate');
-INSERT INTO simple_category VALUES ('Bolachas de Criança');
-INSERT INTO simple_category VALUES ('Bolachas de Água e Sal');
+INSERT INTO simple_category VALUES ('Refrigerantes com Gás'); --
+INSERT INTO simple_category VALUES ('Refrigerantes sem Gás'); --
+INSERT INTO simple_category VALUES ('Cerveja'); --
+INSERT INTO simple_category VALUES ('Sumos Naturais'); --
+INSERT INTO simple_category VALUES ('Sumos com Conservantes'); --
+INSERT INTO simple_category VALUES ('Água'); --
+INSERT INTO simple_category VALUES ('Bolachas de Chocolate'); --
+INSERT INTO simple_category VALUES ('Bolachas de Criança'); --
+INSERT INTO simple_category VALUES ('Bolachas de Água e Sal'); --
 
 -------------- has_other --------------
 INSERT INTO has_other VALUES ('Sopas', 'Sopas Take-Away');
@@ -68,31 +68,32 @@ INSERT INTO has_other VALUES ('Bolachas', 'Bolachas de Chocolate');
 INSERT INTO has_other VALUES ('Bolachas', 'Bolachas de Criança');
 INSERT INTO has_other VALUES ('Bolachas', 'Bolachas de Água e Sal');
 
+-- TODO explicar categoria
 -------------- Product --------------
-INSERT INTO product VALUES (1, 'Sopa de espinafres');
-INSERT INTO product VALUES (2, 'Sopa de cenoura passada');
-INSERT INTO product VALUES (3, 'Sopa de legumes');
-INSERT INTO product VALUES (4, 'Sopa de tomate');
-INSERT INTO product VALUES (5, 'Canja');
-INSERT INTO product VALUES (6, 'Sopa de agrião');
-INSERT INTO product VALUES (7, 'Água natural');
-INSERT INTO product VALUES (8, 'Água de morango');
-INSERT INTO product VALUES (9, 'Água com gás');
-INSERT INTO product VALUES (10, 'Coca-cola');
-INSERT INTO product VALUES (11, 'Iced-tea');
-INSERT INTO product VALUES (12, 'Fanta');
-INSERT INTO product VALUES (13, 'Sumo de laranja');
-INSERT INTO product VALUES (14, 'Sumo de maçã');
-INSERT INTO product VALUES (15, 'Compal de maçã');
-INSERT INTO product VALUES (16, 'Compal de pêra');
-INSERT INTO product VALUES (17, 'Sagres');
-INSERT INTO product VALUES (18, 'Super-Bock');
-INSERT INTO product VALUES (19, 'Oreo');
-INSERT INTO product VALUES (20, 'Chips Ahoy');
-INSERT INTO product VALUES (21, 'Tuc');
-INSERT INTO product VALUES (22, 'Principe');
-INSERT INTO product VALUES (23, 'Dino');
-INSERT INTO product VALUES (24, 'Gullon Chocolate');
+INSERT INTO product VALUES (1, 'Sopa de espinafres', 'Sopas Take-Away Quentes');
+INSERT INTO product VALUES (2, 'Sopa de cenoura passada', 'Sopas Bebé');
+INSERT INTO product VALUES (3, 'Sopa de legumes', 'Sopas Take-Away Quentes');
+INSERT INTO product VALUES (4, 'Sopa de tomate', 'Sopas Take-Away Frias');
+INSERT INTO product VALUES (5, 'Canja', 'Sopas Take-Away Quentes');
+INSERT INTO product VALUES (6, 'Sopa de agrião', 'Sopas');
+INSERT INTO product VALUES (7, 'Água natural', 'Água');
+INSERT INTO product VALUES (8, 'Água de morango', 'Água');
+INSERT INTO product VALUES (9, 'Água com gás', 'Água');
+INSERT INTO product VALUES (10, 'Coca-cola', 'Refrigerantes com Gás');
+INSERT INTO product VALUES (11, 'Iced-tea', 'Refrigerantes sem Gás');
+INSERT INTO product VALUES (12, 'Fanta', 'Refrigerantes com Gás');
+INSERT INTO product VALUES (13, 'Sumo de laranja', 'Sumos Naturais');
+INSERT INTO product VALUES (14, 'Sumo de maçã', 'Sumos Naturais');
+INSERT INTO product VALUES (15, 'Compal de maçã', 'Sumos com Conservantes');
+INSERT INTO product VALUES (16, 'Compal de pêra', 'Sumos com Conservantes');
+INSERT INTO product VALUES (17, 'Sagres', 'Cerveja');
+INSERT INTO product VALUES (18, 'Super-Bock', 'Cerveja');
+INSERT INTO product VALUES (19, 'Oreo', 'Bolachas de Chocolate');
+INSERT INTO product VALUES (20, 'Chips Ahoy', 'Bolachas de Chocolate');
+INSERT INTO product VALUES (21, 'Tuc', 'Bolachas de Água e Sal');
+INSERT INTO product VALUES (22, 'Principe', 'Bolachas de Criança');
+INSERT INTO product VALUES (23, 'Dino', 'Bolachas de Criança');
+INSERT INTO product VALUES (24, 'Gullon Chocolate', 'Bolachas de Chocolate');
 
 -------------- has_category --------------
 -- TODO se um produto pertence a uma subcategoria, tem de estar relacionado com todas as supercategorias acima?
@@ -197,25 +198,25 @@ INSERT INTO installed_at VALUES (11, 'manuf4', 'Baixa Porto');
 INSERT INTO installed_at VALUES (12, 'manuf4', 'Centro de Évora');
 
 -------------- Shelve --------------
-INSERT INTO shelve VALUES (1, 1, 'manuf1', 10, 'Sopas');
-INSERT INTO shelve VALUES (2, 1, 'manuf1', 15, 'Sopas Bebé');
-INSERT INTO shelve VALUES (3, 1, 'manuf1', 15, 'Água');
-INSERT INTO shelve VALUES (4, 1, 'manuf1', 20, 'Refrigerantes com Gás');
-INSERT INTO shelve VALUES (5, 1, 'manuf1', 10, 'Sumos Naturais');
+INSERT INTO shelve VALUES (1, 1, 'manuf1', 10, 'Sopas Take-Away Quentes'); --
+INSERT INTO shelve VALUES (2, 1, 'manuf1', 15, 'Sopas Bebé'); -- 
+INSERT INTO shelve VALUES (3, 1, 'manuf1', 15, 'Água'); --
+INSERT INTO shelve VALUES (4, 1, 'manuf1', 20, 'Refrigerantes com Gás'); --
+INSERT INTO shelve VALUES (5, 1, 'manuf1', 10, 'Sumos Naturais'); --
 INSERT INTO shelve VALUES (6, 1, 'manuf1', 10, 'Bolachas');
 
 INSERT INTO shelve VALUES (1, 2, 'manuf1', 15, 'Água');
 INSERT INTO shelve VALUES (2, 2, 'manuf1', 10, 'Refrigerantes com Gás');
-INSERT INTO shelve VALUES (3, 2, 'manuf1', 10, 'Sumos com Conservantes');
-INSERT INTO shelve VALUES (4, 2, 'manuf1', 10, 'Cerveja');
+INSERT INTO shelve VALUES (3, 2, 'manuf1', 10, 'Sumos com Conservantes'); --
+INSERT INTO shelve VALUES (4, 2, 'manuf1', 10, 'Cerveja'); --
 
 INSERT INTO shelve VALUES (1, 3, 'manuf1', 10, 'Sopas Bebé');
 INSERT INTO shelve VALUES (2, 3, 'manuf1', 10, 'Água');
 INSERT INTO shelve VALUES (3, 3, 'manuf1', 10, 'Cerveja');
-INSERT INTO shelve VALUES (4, 3, 'manuf1', 10, 'Bolachas de Chocolate');
-INSERT INTO shelve VALUES (5, 3, 'manuf1', 10, 'Bolachas de Água e Sal');
+INSERT INTO shelve VALUES (4, 3, 'manuf1', 10, 'Bolachas de Chocolate'); --
+INSERT INTO shelve VALUES (5, 3, 'manuf1', 10, 'Bolachas de Água e Sal'); --
 
-INSERT INTO shelve VALUES (1, 4, 'manuf2', 15, 'Sopas');
+INSERT INTO shelve VALUES (1, 4, 'manuf2', 15, 'Sopas Take-Away Frias'); --
 INSERT INTO shelve VALUES (2, 4, 'manuf2', 20, 'Bolachas');
 INSERT INTO shelve VALUES (3, 4, 'manuf2', 10, 'Refrigerantes');
 INSERT INTO shelve VALUES (4, 4, 'manuf2', 10, 'Sopas Bebé');
@@ -234,12 +235,12 @@ INSERT INTO shelve VALUES (6, 6, 'manuf2', 10, 'Bolachas');
 
 INSERT INTO shelve VALUES (1, 7, 'manuf3', 15, 'Sopas');
 INSERT INTO shelve VALUES (2, 7, 'manuf3', 20, 'Bolachas');
-INSERT INTO shelve VALUES (3, 7, 'manuf3', 10, 'Refrigerantes sem Gás');
+INSERT INTO shelve VALUES (3, 7, 'manuf3', 10, 'Refrigerantes sem Gás'); --
 INSERT INTO shelve VALUES (4, 7, 'manuf3', 10, 'Sopas Take-Away');
 
 INSERT INTO shelve VALUES (1, 8, 'manuf3', 10, 'Bolachas de Água e Sal');
 INSERT INTO shelve VALUES (2, 8, 'manuf3', 10, 'Bolachas de Chocolate');
-INSERT INTO shelve VALUES (3, 8, 'manuf3', 10, 'Bolachas de Criança');
+INSERT INTO shelve VALUES (3, 8, 'manuf3', 10, 'Bolachas de Criança'); --
 INSERT INTO shelve VALUES (4, 8, 'manuf3', 15, 'Água');
 
 INSERT INTO shelve VALUES (1, 9, 'manuf3', 10, 'Sopas Take-Away Frias');
@@ -264,8 +265,6 @@ INSERT INTO shelve VALUES (4, 12, 'manuf4', 15, 'Água');
 
 -------------- Planogram --------------
 INSERT INTO planogram VALUES (1, 1, 1, 'manuf1', 2, 10, 'loc');
-INSERT INTO planogram VALUES (4, 1, 1, 'manuf1', 3, 15, 'loc');
-INSERT INTO planogram VALUES (3, 1, 1, 'manuf1', 1, 5, 'loc');
 INSERT INTO planogram VALUES (2, 2, 1, 'manuf1', 6, 30, 'loc');
 INSERT INTO planogram VALUES (7, 3, 1, 'manuf1', 3, 25, 'loc');
 INSERT INTO planogram VALUES (8, 3, 1, 'manuf1', 2, 10, 'loc');
@@ -293,8 +292,7 @@ INSERT INTO planogram VALUES (20, 4, 3, 'manuf1', 2, 10, 'loc');
 INSERT INTO planogram VALUES (24, 4, 3, 'manuf1', 2, 10, 'loc');
 INSERT INTO planogram VALUES (21, 5, 3, 'manuf1', 6, 30, 'loc');
 
-INSERT INTO planogram VALUES (1, 1, 4, 'manuf2', 2, 10, 'loc');
-INSERT INTO planogram VALUES (6, 1, 4, 'manuf2', 4, 20, 'loc');
+INSERT INTO planogram VALUES (4, 1, 4, 'manuf2', 2, 10, 'loc');
 INSERT INTO planogram VALUES (23, 2, 4, 'manuf2', 1, 5, 'loc');
 INSERT INTO planogram VALUES (24, 2, 4, 'manuf2', 5, 25, 'loc');
 INSERT INTO planogram VALUES (10, 3, 4, 'manuf2', 3, 15, 'loc');
@@ -377,28 +375,28 @@ INSERT INTO retailer VALUES (11, 'Joana');
 INSERT INTO retailer VALUES (12, 'Carolina');
 
 -------------- responsible_for --------------
-INSERT INTO responsible_for VALUES ('Sopas', 1, 1, 'manuf1');
-INSERT INTO responsible_for VALUES ('Sopas Bebé', 1, 1, 'manuf1');
-INSERT INTO responsible_for VALUES ('Água', 2, 1, 'manuf1');
-INSERT INTO responsible_for VALUES ('Refrigerantes com Gás', 2, 1, 'manuf1');
-INSERT INTO responsible_for VALUES ('Sumos Naturais', 2, 1, 'manuf1');
-INSERT INTO responsible_for VALUES ('Bolachas', 3, 1, 'manuf1');
+INSERT INTO responsible_for VALUES ('Sopas Take-Away Quentes', 1, 1, 'manuf1'); --
+INSERT INTO responsible_for VALUES ('Sopas Bebé', 1, 1, 'manuf1'); --
+INSERT INTO responsible_for VALUES ('Água', 1, 1, 'manuf1'); --
+INSERT INTO responsible_for VALUES ('Refrigerantes com Gás', 1, 1, 'manuf1'); --
+INSERT INTO responsible_for VALUES ('Sumos Naturais', 1, 1, 'manuf1');
+INSERT INTO responsible_for VALUES ('Bolachas', 1, 1, 'manuf1'); --- AQUI
 
 INSERT INTO responsible_for VALUES ('Água', 2, 2, 'manuf1');
 INSERT INTO responsible_for VALUES ('Refrigerantes com Gás', 2, 2, 'manuf1');
-INSERT INTO responsible_for VALUES ('Sumos com Conservantes', 3, 2, 'manuf1');
-INSERT INTO responsible_for VALUES ('Cerveja', 4, 2, 'manuf1');
+INSERT INTO responsible_for VALUES ('Sumos com Conservantes', 1, 2, 'manuf1'); --
+INSERT INTO responsible_for VALUES ('Cerveja', 1, 2, 'manuf1'); --
 
 INSERT INTO responsible_for VALUES ('Sopas Bebé', 1, 3, 'manuf1');
 INSERT INTO responsible_for VALUES ('Água', 2, 3, 'manuf1');
 INSERT INTO responsible_for VALUES ('Cerveja', 4, 3, 'manuf1');
-INSERT INTO responsible_for VALUES ('Bolachas de Chocolate', 3, 3, 'manuf1');
-INSERT INTO responsible_for VALUES ('Bolachas de Água e Sal', 1, 3, 'manuf1');
+INSERT INTO responsible_for VALUES ('Bolachas de Chocolate', 1, 3, 'manuf1'); --
+INSERT INTO responsible_for VALUES ('Bolachas de Água e Sal', 1, 3, 'manuf1'); --
 
-INSERT INTO responsible_for VALUES ('Sopas', 1, 4, 'manuf2');
+INSERT INTO responsible_for VALUES ('Sopas Take-Away Frias', 1, 4, 'manuf2'); --
 INSERT INTO responsible_for VALUES ('Bolachas', 3, 4, 'manuf2');
 INSERT INTO responsible_for VALUES ('Refrigerantes', 2, 4, 'manuf2');
-INSERT INTO responsible_for VALUES ('Sopas Bebé', 1, 4, 'manuf2');
+INSERT INTO responsible_for VALUES ('Sopas Bebé', 1, 4, 'manuf2'); --
 
 INSERT INTO responsible_for VALUES ('Água', 2, 5, 'manuf2');
 INSERT INTO responsible_for VALUES ('Refrigerantes com Gás', 2, 5, 'manuf2');
@@ -414,12 +412,12 @@ INSERT INTO responsible_for VALUES ('Bolachas', 5, 6, 'manuf2');
 
 INSERT INTO responsible_for VALUES ('Sopas', 7, 7, 'manuf3');
 INSERT INTO responsible_for VALUES ('Bolachas', 8, 7, 'manuf3');
-INSERT INTO responsible_for VALUES ('Refrigerantes sem Gás', 9, 7, 'manuf3');
+INSERT INTO responsible_for VALUES ('Refrigerantes sem Gás', 1, 7, 'manuf3');
 INSERT INTO responsible_for VALUES ('Sopas Take-Away', 7, 7, 'manuf3');
 
 INSERT INTO responsible_for VALUES ('Bolachas de Água e Sal', 8, 8, 'manuf3');
 INSERT INTO responsible_for VALUES ('Bolachas de Chocolate', 8, 8, 'manuf3');
-INSERT INTO responsible_for VALUES ('Bolachas de Criança', 8, 8, 'manuf3');
+INSERT INTO responsible_for VALUES ('Bolachas de Criança', 1, 8, 'manuf3'); --
 INSERT INTO responsible_for VALUES ('Água', 9, 8, 'manuf3');
 
 INSERT INTO responsible_for VALUES ('Sopas Take-Away Frias', 7, 9, 'manuf3');
@@ -447,24 +445,19 @@ INSERT INTO replenishment_event VALUES (1, 1, 1, 'manuf1', '2021-10-21 14:02', 1
 INSERT INTO replenishment_event VALUES (1, 1, 1, 'manuf1', '2021-10-30 13:47', 7, 1);
 INSERT INTO replenishment_event VALUES (1, 1, 1, 'manuf1', '2021-11-03 11:24', 2, 1);
 
-INSERT INTO replenishment_event VALUES (4, 1, 1, 'manuf1', '2021-09-08 09:02', 15, 1);
-INSERT INTO replenishment_event VALUES (4, 1, 1, 'manuf1', '2021-10-23 12:04', 15, 1);
-
-INSERT INTO replenishment_event VALUES (3, 1, 1, 'manuf1', '2021-10-21 14:02', 2, 1);
-
 INSERT INTO replenishment_event VALUES (2, 2, 1, 'manuf1', '2021-09-27 17:25', 27, 1);
 INSERT INTO replenishment_event VALUES (2, 2, 1, 'manuf1', '2021-10-15 11:37', 26, 1);
 
-INSERT INTO replenishment_event VALUES (7, 3, 1, 'manuf1', '2021-10-21 19:25', 22, 2);
-INSERT INTO replenishment_event VALUES (8, 3, 1, 'manuf1', '2021-10-21 15:43', 7, 2);
-INSERT INTO replenishment_event VALUES (9, 3, 1, 'manuf1', '2021-10-21 09:55', 5, 2);
-INSERT INTO replenishment_event VALUES (9, 3, 1, 'manuf1', '2021-10-21 08:12', 4, 2);
+INSERT INTO replenishment_event VALUES (7, 3, 1, 'manuf1', '2021-10-21 19:25', 22, 1);
+INSERT INTO replenishment_event VALUES (8, 3, 1, 'manuf1', '2021-10-21 15:43', 7, 1);
+INSERT INTO replenishment_event VALUES (9, 3, 1, 'manuf1', '2021-10-21 09:55', 5, 1);
+INSERT INTO replenishment_event VALUES (9, 3, 1, 'manuf1', '2021-10-21 08:12', 4, 1);
 
-INSERT INTO replenishment_event VALUES (10, 4, 1, 'manuf1', '2021-10-22 17:02', 10, 2);
-INSERT INTO replenishment_event VALUES (12, 4, 1, 'manuf1', '2021-10-22 17:10', 20, 2);
+INSERT INTO replenishment_event VALUES (10, 4, 1, 'manuf1', '2021-10-22 17:02', 10, 1);
+INSERT INTO replenishment_event VALUES (12, 4, 1, 'manuf1', '2021-10-22 17:10', 20, 1);
 
-INSERT INTO replenishment_event VALUES (13, 5, 1, 'manuf1', '2021-10-15 09:47', 4, 2);
-INSERT INTO replenishment_event VALUES (14, 5, 1, 'manuf1', '2021-10-15 10:02', 21, 2);
+INSERT INTO replenishment_event VALUES (13, 5, 1, 'manuf1', '2021-10-15 09:47', 4, 1);
+INSERT INTO replenishment_event VALUES (14, 5, 1, 'manuf1', '2021-10-15 10:02', 21, 1);
 
 INSERT INTO replenishment_event VALUES (19, 6, 1, 'manuf1', '2021-10-05 14:16', 9, 3);
 INSERT INTO replenishment_event VALUES (20, 6, 1, 'manuf1', '2021-10-03 15:30', 12, 3);
@@ -476,16 +469,16 @@ INSERT INTO replenishment_event VALUES (10, 2, 2, 'manuf1', '2021-10-22 14:16', 
 INSERT INTO replenishment_event VALUES (10, 2, 2, 'manuf1', '2021-11-05 17:22', 10, 2);
 INSERT INTO replenishment_event VALUES (12, 2, 2, 'manuf1', '2021-10-26 19:34', 15, 2);
 
-INSERT INTO replenishment_event VALUES (15, 3, 2, 'manuf1', '2021-09-27 19:16', 9, 3);
-INSERT INTO replenishment_event VALUES (15, 3, 2, 'manuf1', '2021-09-16 15:16', 10, 3);
-INSERT INTO replenishment_event VALUES (15, 3, 2, 'manuf1', '2021-09-22 13:16', 10, 3);
-INSERT INTO replenishment_event VALUES (16, 3, 2, 'manuf1', '2021-11-12 10:42', 20, 3);
-INSERT INTO replenishment_event VALUES (16, 3, 2, 'manuf1', '2021-10-10 12:23', 18, 3);
-INSERT INTO replenishment_event VALUES (16, 3, 2, 'manuf1', '2021-09-22 20:16', 16, 3);
+INSERT INTO replenishment_event VALUES (15, 3, 2, 'manuf1', '2021-09-27 19:16', 9, 1);
+INSERT INTO replenishment_event VALUES (15, 3, 2, 'manuf1', '2021-09-16 15:16', 10, 1);
+INSERT INTO replenishment_event VALUES (15, 3, 2, 'manuf1', '2021-09-22 13:16', 10, 1);
+INSERT INTO replenishment_event VALUES (16, 3, 2, 'manuf1', '2021-11-12 10:42', 20, 1);
+INSERT INTO replenishment_event VALUES (16, 3, 2, 'manuf1', '2021-10-10 12:23', 18, 1);
+INSERT INTO replenishment_event VALUES (16, 3, 2, 'manuf1', '2021-09-22 20:16', 16, 1);
 
-INSERT INTO replenishment_event VALUES (17, 4, 2, 'manuf1', '2021-10-05 15:12', 16, 4);
-INSERT INTO replenishment_event VALUES (17, 4, 2, 'manuf1', '2021-10-14 10:20', 27, 4);
-INSERT INTO replenishment_event VALUES (17, 4, 2, 'manuf1', '2021-11-02 09:24', 22, 4);
+INSERT INTO replenishment_event VALUES (17, 4, 2, 'manuf1', '2021-10-05 15:12', 16, 1);
+INSERT INTO replenishment_event VALUES (17, 4, 2, 'manuf1', '2021-10-14 10:20', 27, 1);
+INSERT INTO replenishment_event VALUES (17, 4, 2, 'manuf1', '2021-11-02 09:24', 22, 1);
 
 INSERT INTO replenishment_event VALUES (2, 1, 3, 'manuf1', '2021-11-06 18:16', 30, 1);
 
@@ -494,18 +487,17 @@ INSERT INTO replenishment_event VALUES (8, 2, 3, 'manuf1', '2021-10-17 16:54', 2
 
 INSERT INTO replenishment_event VALUES (17, 3, 3, 'manuf1', '2021-09-24 15:16', 30, 4);
 
-INSERT INTO replenishment_event VALUES (19, 4, 3, 'manuf1', '2021-10-17 19:31', 8, 3);
-INSERT INTO replenishment_event VALUES (19, 4, 3, 'manuf1', '2021-10-26 16:24', 9, 3);
-INSERT INTO replenishment_event VALUES (20, 4, 3, 'manuf1', '2021-10-20 08:46', 10, 3);
-INSERT INTO replenishment_event VALUES (20, 4, 3, 'manuf1', '2021-11-02 17:27', 10, 3);
-INSERT INTO replenishment_event VALUES (24, 4, 3, 'manuf1', '2021-09-18 20:36', 7, 3);
+INSERT INTO replenishment_event VALUES (19, 4, 3, 'manuf1', '2021-10-17 19:31', 8, 1);
+INSERT INTO replenishment_event VALUES (19, 4, 3, 'manuf1', '2021-10-26 16:24', 9, 1);
+INSERT INTO replenishment_event VALUES (20, 4, 3, 'manuf1', '2021-10-20 08:46', 10, 1);
+INSERT INTO replenishment_event VALUES (20, 4, 3, 'manuf1', '2021-11-02 17:27', 10, 1);
+INSERT INTO replenishment_event VALUES (24, 4, 3, 'manuf1', '2021-09-18 20:36', 7, 1);
 
 INSERT INTO replenishment_event VALUES (21, 5, 3, 'manuf1', '2021-11-03 12:01', 27, 1);
 INSERT INTO replenishment_event VALUES (21, 5, 3, 'manuf1', '2021-10-30 13:34', 19, 1);
 INSERT INTO replenishment_event VALUES (21, 5, 3, 'manuf1', '2021-10-10 17:24', 24, 1);
 
-INSERT INTO replenishment_event VALUES (1, 1, 4, 'manuf2', '2021-10-21 14:02', 9, 1);
-INSERT INTO replenishment_event VALUES (6, 1, 4, 'manuf2', '2021-11-07 17:21', 20, 1);
+INSERT INTO replenishment_event VALUES (4, 1, 4, 'manuf2', '2021-10-21 14:02', 9, 1);
 INSERT INTO replenishment_event VALUES (23, 2, 4, 'manuf2', '2021-11-03 16:34', 4, 3);
 INSERT INTO replenishment_event VALUES (24, 2, 4, 'manuf2', '2021-11-03 18:22', 22, 3);
 INSERT INTO replenishment_event VALUES (10, 3, 4, 'manuf2', '2021-10-22 19:28', 12, 2);
@@ -556,7 +548,7 @@ INSERT INTO replenishment_event VALUES (3, 4, 7, 'manuf3', '2021-11-07 09:10', 1
 INSERT INTO replenishment_event VALUES (21, 1, 8, 'manuf3', '2021-10-24 08:47', 25, 8);
 INSERT INTO replenishment_event VALUES (19, 2, 8, 'manuf3', '2021-10-24 11:10', 14, 8);
 INSERT INTO replenishment_event VALUES (24, 2, 8, 'manuf3', '2021-10-24 11:15', 15, 8);
-INSERT INTO replenishment_event VALUES (22, 3, 8, 'manuf3', '2021-10-15 14:36', 29, 8);
+INSERT INTO replenishment_event VALUES (22, 3, 8, 'manuf3', '2021-10-15 14:36', 29, 1);
 INSERT INTO replenishment_event VALUES (9, 4, 8, 'manuf3', '2021-10-18 10:17', 12, 9);
 INSERT INTO replenishment_event VALUES (7, 4, 8, 'manuf3', '2021-10-18 11:24', 7, 9);
 
