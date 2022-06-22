@@ -9,13 +9,11 @@
 -- WHERE R.tin = P.tin and P.nome_cat = 'Frutos'
 
 CREATE INDEX retailer_name_index ON retailer(retailer_name)
--- O índice sobre retailer_name já devia estar criado, right?? Porque é UNIQUE.
--- Mas assim não havia indice para criar então deve ser isto.
-
--- R.tin e P.tin são chaves primárias e estrangeiras, respetivamente, pelo que não
+-- R.tin é uma chave primária, e P.tin e P.nome_cat são chaves estrangeiras, pelo que não
 -- há necessidade de de criar indices sobre estes atributos, no entanto, o
 -- SELECT DISTINCT remove duplicados, ou seja, há um sorting, pelo que deve haver
 -- um índice em R.nome
+
 
 -- 7.2 -
 -- SELECT T.nome, count(T.ean)
@@ -24,9 +22,6 @@ CREATE INDEX retailer_name_index ON retailer(retailer_name)
 -- GROUP BY T.nome
 
 CREATE INDEX descr_index ON product(descr)
--- Talvez fazer com que nome seja o primeiro atributo da tabela tem_categoria
--- quando a criamos?? Para facilitar o GROUP BY.
-
 -- P.cat e T.nome são chaves estrangeiras, e como tal não precisam que se crie índices
 -- porque já são criados por defeito. Mas é benéfico criar um índice em P.desc para ajudar 
 -- na clausula WHERE P.desc like 'A%'.
