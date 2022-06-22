@@ -6,48 +6,49 @@
 
 <ul class="tab tab-block">
     <li class="tab-item">
-        <a id="new-simple-category-btn">New Simple Category</a>
+        <a id="new-simple-category-btn">Simple Category</a>
     </li>
     <li class="tab-item">
-        <a id="new-super-category-btn">New Super Category</a>
+        <a id="new-super-category-btn">Super Category</a>
     </li>
     <li class="tab-item">
-        <a id="add-category-to-super-category-btn">Add Category to Super Category</a>
+        <a id="add-category-to-super-category-btn">Add Sub Category to Super Category</a>
     </li>
 </ul>
 
 <div class="container" id="new-simple-category-form">
-    <form action="{{ url_for('replenishments') }}" method="post" class="form-horizontal col-3">
+    <form action="{{ url_for('create_simple_category') }}" method="post" class="form-horizontal col-3">
         <div class="form-group">
-            <label class="form-label" for="manuf">Form1</label>
-            <input class="form-input" type="text" id="manuf" name="manuf" placeholder="Manufacturer">
-            <label class="form-label" for="serial_nr">IVM Serial Number</label>
-            <input class="form-input" type="number" id="serial_nr" name="serial_nr" placeholder="IVM Serial Number">
-            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Search</button>
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Name">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Create</button>
         </div>
     </form>
 </div>
 
 <div class="container" id="new-super-category-form">
-    <form action="{{ url_for('replenishments') }}" method="post" class="form-horizontal col-3">
+    <form action="{{ url_for('create_super_category') }}" method="post" class="form-horizontal col-3">
         <div class="form-group">
-            <label class="form-label" for="manuf">Form2</label>
-            <input class="form-input" type="text" id="manuf" name="manuf" placeholder="Manufacturer">
-            <label class="form-label" for="serial_nr">IVM Serial Number</label>
-            <input class="form-input" type="number" id="serial_nr" name="serial_nr" placeholder="IVM Serial Number">
-            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Search</button>
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Name">
+            <label class="form-label" for="sub_category_name">Sub Category Name</label>
+            <input class="form-input" type="text" id="sub_category_name" name="sub_category_name"
+                placeholder="Sub Category Name">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Create</button>
         </div>
     </form>
 </div>
 
 <div class="container" id="add-category-to-super-category-form">
-    <form action="{{ url_for('replenishments') }}" method="post" class="form-horizontal col-3">
+    <form action="{{ url_for('create_sub_category') }}" method="post" class="form-horizontal col-3">
         <div class="form-group">
-            <label class="form-label" for="manuf">Form3</label>
-            <input class="form-input" type="text" id="manuf" name="manuf" placeholder="Manufacturer">
-            <label class="form-label" for="serial_nr">IVM Serial Number</label>
-            <input class="form-input" type="number" id="serial_nr" name="serial_nr" placeholder="IVM Serial Number">
-            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Search</button>
+            <label class="form-label" for="sub_category_name">Sub Category Name</label>
+            <input class="form-input" type="text" id="sub_category_name" name="sub_category_name"
+                placeholder="Sub Category Name">
+            <label class="form-label" for="super_category_name">Super Category Name</label>
+            <input class="form-input" type="text" id="super_category_name" name="super_category_name"
+                placeholder="Super Category Name">
+            <button class="btn btn-primary input-group-btn" style="margin-top: 1rem">Create</button>
         </div>
     </form>
 </div>
@@ -63,10 +64,10 @@
     var selected_btn = btn1;
     var selected_form = form1;
 
-    selected_btn.classList.toggle("active");
     form1.style.display = "block";
     form2.style.display = "none";
     form3.style.display = "none";
+    selected_btn.classList.toggle("active");
 
     btn1.addEventListener("click", () => {
         selected_btn.classList.toggle("active");

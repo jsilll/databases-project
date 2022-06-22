@@ -13,19 +13,39 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <style>
+        .btn {
+            -webkit-transition: none !important;
+            -moz-transition: none !important;
+            -o-transition: none !important;
+            transition: none !important;
+        }
+
+        .form-input {
+            -webkit-transition: none !important;
+            -moz-transition: none !important;
+            -o-transition: none !important;
+            transition: none !important;
+        }
+    </style>
+
 </head>
 
 <body>
     <header class="navbar" style="padding: 1rem; box-shadow: 2px 2px 2px lightgrey;">
         <div class="navbar-primary">
-            <a href="{{ url_for('index') }}" class="navbar-brand mr-2">IVM Manager</a>
-            <a href="{{ url_for('replenishments') }}" class="btn btn-link">Replenishments</a>
-            <a href="{{ url_for('categories') }}" class="btn btn-link">Categories</a>
+            <a href="{{ url_for('index_page') }}" class="navbar-brand mr-2">IVM Manager</a>
+            <a href="{{ url_for('replenishments_page') }}" class="btn btn-link">Replenishments</a>
+            <a href="{{ url_for('categories_page') }}" class="btn btn-link">Categories</a>
+            <a href="{{ url_for('retailers_page') }}" class="btn btn-link">Retailers</a>
         </div>
     </header>
     <div class="container" style="padding: 1rem">
         {% block content %} {% endblock %}
     </div>
 </body>
+
+
 
 </html>
