@@ -1,15 +1,18 @@
+-- num dado período (i.e. entre duas datas), por dia da semana, por concelho e no total
+SELECT day_of_week, county, SUM(nr_units) AS tot_units
+FROM sales
+WHERE sale_year <= EXTRACT(YEAR FROM TO_DATE('2021-10-17', 'YYYY-MM-DD'))
+		AND sale_year >= EXTRACT(YEAR FROM TO_DATE('2021-09-05', 'YYYY-MM-DD'))
+       	AND sale_month <= EXTRACT(MONTH FROM TO_DATE('2021-10-17', 'YYYY-MM-DD'))
+		AND sale_month >= EXTRACT(MONTH FROM TO_DATE('2021-09-05', 'YYYY-MM-DD'))
+       	AND day_of_month <= EXTRACT(DAY FROM TO_DATE('2021-10-17', 'YYYY-MM-DD'))
+	   	AND day_of_month >= EXTRACT(DAY FROM TO_DATE('2021-09-05', 'YYYY-MM-DD'))
+GROUP BY
+	GROUPING SETS ((day_of_week), (county), ());
+	
 -- num dado distrito (i.e. “Lisboa”), por concelho, categoria, dia da semana e no total
--- TODO -> é isto que o enunciado quer dizer? dado um distrito ver por concelho, categoria, dia da semana e total separadamente?
 SELECT district, county, category_name, day_of_week, SUM(nr_units) AS tot_units
 FROM sales
 GROUP BY
 	GROUPING SETS ((district, county), (district, category_name), (district, day_of_week), (district))
 HAVING district = 'Lisboa';
-
--- TODO justificar
-SELECT sale_year, sale_month, day_of_month, day_of_week, county, SUM(nr_units) AS tot_units
-FROM sales
-GROUP BY
-	GROUPING SETS ((sale_year, sale_month, day_of_month, day_of_week), (sale_year, sale_month, day_of_month, county), (sale_year, sale_month, day_of_month))
-HAVING CONCAT(CAST(sale_year AS varchar), '-', CAST(sale_month AS varchar), '-', CAST(day_of_month AS varchar)) > '2021-9-01'
-       AND CONCAT(CAST(sale_year AS varchar), '-', CAST(sale_month AS varchar), '-', CAST(day_of_month AS varchar)) < '2021-10-27'

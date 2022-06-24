@@ -1,11 +1,11 @@
 -- (RI-1) Uma Categoria não pode estar contida em si própria
-DROP TRIGGER check_self_contaned_category_trigger ON has_other IF EXISTS;
+DROP TRIGGER IF EXISTS check_self_contaned_category_trigger ON has_other;
 
 -- (RI-4) O número de unidades repostas num Evento de Reposição não pode exceder o número de unidades especificado no Planograma
-DROP TRIGGER check_number_of_replenished_units_trigger ON replenishment_event IF EXISTS;
+DROP TRIGGER IF EXISTS check_number_of_replenished_units_trigger ON replenishment_event;
 
 -- (RI-5) Um Produto só pode ser reposto numa Prateleira que apresente (pelo menos) uma das Categorias desse produto
-DROP TRIGGER check_product_on_shelve_trigger ON replenishment_event IF EXISTS;
+DROP TRIGGER IF EXISTS check_product_on_shelve_trigger ON replenishment_event;
 
 CREATE OR REPLACE FUNCTION check_self_contaned_category_proc()
 RETURNS TRIGGER
