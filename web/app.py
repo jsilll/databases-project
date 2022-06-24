@@ -2,19 +2,9 @@ from flask import Flask
 from flask import (render_template,
                    request,
                    url_for,
-                   redirect,
-                   abort)
+                   redirect)
 
 from connection import get_db_connection
-
-# [x] Inserir e remover um retalhista, com todos os seus produtos, garantindo que esta operação seja atómica;
-# [x] Listar todos os eventos de reposição de uma IVM, apresentando o número de unidades repostas por categoria de produto
-# [x] Inserir e remover categorias e sub-categorias
-# [ ] Listar todas as sub-categorias de uma super-categoria, a todos os níveis de profundidade.
-
-# TODO: 3: parse date time?
-# TODO: 3: tem mesmo de ser com o post?
-# TODO: tirar o load esquiesito dos butões
 
 app = Flask(__name__)
 
@@ -53,7 +43,7 @@ def list_replenishments():
                     (serial_nr, manuf))
         res = cur.fetchall()
     except Exception as e:
-        return str(e)
+        return render_template("errors/generic.html", error = e)
     finally:
         cur.close()
         conn.close()
@@ -92,7 +82,7 @@ def list_categories():
                     (super_category_name,))
         res = cur.fetchall()
     except Exception as e:
-        return str(e)
+        return render_template("errors/generic.html", error = e)
     finally:
         cur.close()
         conn.close()
@@ -118,7 +108,7 @@ def create_simple_category():
         cur.execute('INSERT INTO simple_category VALUES (%s);', (name,))
         conn.commit()
     except Exception as e:
-        return str(e)
+        return render_template("errors/generic.html", error = e)
     finally:
         cur.close()
         conn.close()
@@ -158,7 +148,7 @@ def create_sub_category():
                     (super_category_name, sub_category_name))
         conn.commit()
     except Exception as e:
-        return str(e)
+        return render_template("errors/generic.html", error = e)
     finally:
         cur.close()
         conn.close()
@@ -180,38 +170,27 @@ def delete_simple_category():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute(
-            'DELETE FROM replenishment_event '
-            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
-        cur.execute(
-            'DELETE FROM planogram '
-            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
-        cur.execute(
-            'DELETE FROM has_category '
-            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
-        cur.execute(
-            'DELETE FROM has_other '
-            'WHERE ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
-        cur.execute('DELETE FROM product WHERE category_name = %s;', (name,))
-        cur.execute(
-            'DELETE FROM responsible_for WHERE category_name = %s', (name,))
         cur.execute('DELETE FROM replenishment_event '
-                    'WHERE '
-                    'nr IN (SELECT nr FROM shelve WHERE category_name = %s) '
-                    'serial_nr IN (SELECT serial_nr FROM shelve WHERE category_name = %s) '
-                    'manuf IN (SELECT manuf FROM shelve WHERE category_name = %s);', (name, name, name))
+                    'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
         cur.execute('DELETE FROM planogram '
-                    'WHERE '
-                    'nr IN (SELECT nr FROM shelve WHERE category_name = %s) '
-                    'serial_nr IN (SELECT serial_nr FROM shelve WHERE category_name = %s) '
-                    'manuf IN (SELECT manuf FROM shelve WHERE category_name = %s);', (name, name, name))
-        cur.execute('DELETE FROM shelve WHERE category_name = %s', (name,))
-        cur.execute(
-            'DELETE FROM simple_category WHERE category_name = %s;', (name,))
+                    'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM has_category '
+                    'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM has_other WHERE category = %s;', (name,))
+        cur.execute('DELETE FROM product WHERE category_name = %s;', (name,))
+        cur.execute('DELETE FROM responsible_for WHERE category_name = %s', (name,))
+        cur.execute('DELETE FROM replenishment_event '
+                    'WHERE (nr, serial_nr, manuf) IN '
+                    '(SELECT nr, serial_nr, manuf FROM shelve WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM planogram '
+                    'WHERE (nr, serial_nr, manuf) IN ' 
+                    '(SELECT nr, serial_nr, manuf FROM shelve WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM shelve WHERE category_name = %s;', (name,))
+        cur.execute('DELETE FROM simple_category WHERE category_name = %s;', (name,))
         cur.execute('DELETE FROM category WHERE category_name = %s;', (name,))
         conn.commit()
     except Exception as e:
-        return(str(e))
+        return render_template("errors/generic.html", error=e)
     finally:
         cur.close()
         conn.close()
@@ -226,27 +205,27 @@ def delete_super_category():
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute(
-            'DELETE FROM replenishment_event '
-            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
-        cur.execute(
-            'DELETE FROM planogram '
-            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
-        cur.execute(
-            'DELETE FROM has_category '
-            'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM replenishment_event '
+                    'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM planogram '
+                    'WHERE  ean IN (SELECT ean FROM product WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM has_category WHERE  category_name = %s;', (name,))
         cur.execute('DELETE FROM has_other WHERE category = %s;', (name,))
         cur.execute('DELETE FROM has_other WHERE super_category = %s;', (name,))
         cur.execute('DELETE FROM product WHERE category_name = %s;', (name,))
-        cur.execute(
-            'DELETE FROM responsible_for WHERE category_name = %s', (name,))
-        cur.execute('DELETE FROM shelve WHERE category_name = %s', (name,))
-        cur.execute(
-            'DELETE FROM super_category WHERE category_name = %s;', (name,))
+        cur.execute('DELETE FROM responsible_for WHERE category_name = %s', (name,))
+        cur.execute('DELETE FROM replenishment_event '
+                    'WHERE (nr, serial_nr, manuf) IN '
+                    '(SELECT nr, serial_nr, manuf FROM shelve WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM planogram '
+                    'WHERE (nr, serial_nr, manuf) IN ' 
+                    '(SELECT nr, serial_nr, manuf FROM shelve WHERE category_name = %s);', (name,))
+        cur.execute('DELETE FROM shelve WHERE category_name = %s;', (name,))
+        cur.execute('DELETE FROM super_category WHERE category_name = %s;', (name,))
         cur.execute('DELETE FROM category WHERE category_name = %s;', (name,))
         conn.commit()
     except Exception as e:
-        return(str(e))
+        return render_template("errors/generic.html", error=e)
     finally:
         cur.close()
         conn.close()
@@ -285,7 +264,7 @@ def create_retailer():
                     (category_name, tin, serial_nr, manuf))
         conn.commit()
     except Exception as e:
-        return str(e)
+        return render_template("errors/generic.html", error = e)
     finally:
         cur.close()
         conn.close()
@@ -312,7 +291,7 @@ def delete_retailer():
         cur.execute('DELETE FROM retailer WHERE tin = %s;', (tin,))
         conn.commit()
     except Exception as e:
-        return str(e)
+        return render_template("errors/generic.html", error = e)
     finally:
         cur.close()
         conn.close()
