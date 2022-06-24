@@ -56,7 +56,6 @@ CREATE TABLE product (
     CONSTRAINT fk_product_cat   FOREIGN KEY (category_name) REFERENCES category(category_name)
 );
 
--- pus primary key
 CREATE TABLE has_category (
     ean             numeric(13,0)   NOT NULL,
     category_name   varchar(50)     NOT NULL,
@@ -117,7 +116,6 @@ CREATE TABLE retailer (
     CONSTRAINT pk_retailer PRIMARY KEY (tin)
 );
 
--- pus primary key
 CREATE TABLE responsible_for (
     category_name   varchar(50)     NOT NULL,
     tin             numeric         NOT NULL CHECK (tin > 0),
