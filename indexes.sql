@@ -20,7 +20,7 @@ CREATE INDEX nome_index ON retalhista(nome)
 -- WHERE P.cat = T.nome and P.desc like 'A%'
 -- GROUP BY T.nome
 
-CREATE INDEX desc_index ON produto USING hash(desc)
+CREATE INDEX desc_index ON produto USING HASH (desc)
 -- Esta query seria optimizada com índices em P.cat e T.nome, no entanto
 -- P.cat e T.nome são chaves estrangeiras, e como tal não precisam que se crie índices
 -- porque já são criados por defeito. Mas é benéfico criar um índice do tipo hash
