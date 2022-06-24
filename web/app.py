@@ -1,11 +1,9 @@
-from urllib import response
 from flask import Flask
 from flask import (render_template,
                    request,
                    url_for,
                    redirect,
                    abort)
-from markupsafe import EscapeFormatter
 
 from connection import get_db_connection
 

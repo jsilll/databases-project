@@ -1,16 +1,6 @@
 from os import environ
 from psycopg2 import connect
 from dotenv import load_dotenv
-from functools import wraps
-from flask import abort
-from psycopg2 import (InterfaceError,
-                      DatabaseError,
-                      DataError,
-                      OperationalError,
-                      IntegrityError,
-                      InternalError,
-                      ProgrammingError,
-                      NotSupportedError)
 
 load_dotenv()
 
