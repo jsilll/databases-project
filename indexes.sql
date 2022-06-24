@@ -1,5 +1,3 @@
--- Este ficheiro não vai estar presente na entrega final --
-
 -- Meramente ilustrativo para mostrar a criação dos índices e apresentar
 -- a justificação para os mesmos (para a escrita do relatório)
 
