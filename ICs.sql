@@ -45,7 +45,7 @@ CREATE OR REPLACE FUNCTION check_product_on_shelve_proc()
 RETURNS TRIGGER
 AS $$
 BEGIN
-    DECLARE category varchar(100);
+    DECLARE category varchar(50);
 
     SELECT category_name INTO category
     FROM shelve S
