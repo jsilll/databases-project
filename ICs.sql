@@ -43,20 +43,21 @@ FOR EACH ROW EXECUTE PROCEDURE check_number_of_replenished_units_proc();
 
 CREATE OR REPLACE FUNCTION check_product_on_shelve_proc()
 RETURNS TRIGGER
-AS $$
+AS 
+$$
+DECLARE category varchar(50);
 BEGIN
-    DECLARE category varchar(50);
 
     SELECT category_name INTO category
     FROM shelve S
-    WHERE NEW.nr = S.nr AND NEW.serial_nr = S.serial_nr AND NEW.manuf = S.manuf 
+    WHERE NEW.nr = S.nr AND NEW.serial_nr = S.serial_nr AND NEW.manuf = S.manuf;
 
     IF category NOT IN (
         SELECT category_name
         FROM has_category H
-        WHERE H.ean = NEW.ean;
+        WHERE H.ean = NEW.ean
     ) THEN
-        RAISE EXCEPTION 'Product can only be replenished in a shelve that has at least one of the product''s categories.';
+        RAISE EXCEPTION 'Product can only be replenished in a shelve that has at least one of the products categories.';
     END IF;
     RETURN NEW;
 END
