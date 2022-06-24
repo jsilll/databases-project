@@ -43,8 +43,7 @@ FOR EACH ROW EXECUTE PROCEDURE check_number_of_replenished_units_proc();
 
 CREATE OR REPLACE FUNCTION check_product_on_shelve_proc()
 RETURNS TRIGGER
-AS 
-$$
+AS $$
 DECLARE category varchar(50);
 BEGIN
 
